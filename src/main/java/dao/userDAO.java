@@ -43,7 +43,7 @@ public class userDAO extends DBContext {
         }
         return list;
     }
-    
+
     public user getUserById(int id) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         try {
@@ -53,14 +53,14 @@ public class userDAO extends DBContext {
             if (rs.next()) {
                 role role = roleDAO.getRoleById(rs.getInt("role_id"));
                 return new user(
-                    rs.getInt("user_id"),
-                    rs.getString("full_name"),
-                    rs.getString("email"),
-                    rs.getString("password_hash"),
-                    rs.getString("phone"),
-                    role,
-                    rs.getString("status"),
-                    rs.getTimestamp("created_at").toLocalDateTime()
+                        rs.getInt("user_id"),
+                        rs.getString("full_name"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("phone"),
+                        role,
+                        rs.getString("status"),
+                        rs.getTimestamp("created_at").toLocalDateTime()
                 );
             }
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class userDAO extends DBContext {
         }
         return null;
     }
-    
+
     public boolean addUser(user u) {
         String sql = "INSERT INTO users (full_name, email, password_hash, phone, role_id, status) VALUES (?, ?, ?, ?, ?, ?)";
         try {
@@ -77,7 +77,7 @@ public class userDAO extends DBContext {
             ps.setString(2, u.getEmail());
             ps.setString(3, u.getPassword());
             ps.setString(4, u.getPhone());
-            ps.setInt(5, u.getRole().getRole_id()); 
+            ps.setInt(5, u.getRole().getRole_id());
             ps.setString(6, u.getStatus());
             System.out.println("Thêm thành công");
             return ps.executeUpdate() > 0;
@@ -86,12 +86,29 @@ public class userDAO extends DBContext {
         }
         return false;
     }
-    
+
     public boolean deleteUser(int id) {
         String sql = "DELETE FROM users WHERE user_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateUser(user u) {
+        String sql = "UPDATE users SET full_name = ?, phone = ?,  role_id = ?, status = ?,email= ? WHERE user_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, u.getFullName());
+            ps.setString(2, u.getPhone());
+            ps.setInt(3, u.getRole().getRole_id());
+            ps.setString(4, u.getStatus());
+            ps.setInt(5, u.getUserId());
+            ps.setString(6, u.getEmail());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,12 +124,11 @@ public class userDAO extends DBContext {
 //        }
 
 //        System.out.println(a.getUserById(1));
+//        roleDAO roleDAO = new roleDAO();
 
-  roleDAO roleDAO = new roleDAO();
-  
-  a.deleteUser(3);
-     
-//        a.addUser(new user(0, "NGộ độc", "aa@gma", "123", "123", roleDAO.getRoleById(1), "ACTIVE", LocalDateTime.now()));
-       
+//        a.updateUser(new user(1005, "Long", "aaaaaa@gmi", "1234", "1234", roleDAO.getRoleById(1), "ACTIVE", LocalDateTime.now()));
+//  a.deleteUser(3);
+//        a.addUser(new user(0, "NGộ độc 3", "aa242@gma", "123", "123", roleDAO.getRoleById(1), "ACTIVE", LocalDateTime.now()));
+
     }
 }
