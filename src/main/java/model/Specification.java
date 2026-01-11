@@ -10,7 +10,7 @@ package model;
  */
 public class Specification {
     private int specificationId;
-    private product product;
+    private Product product;
     private String screen;
     private String cpu;
     private String ram;
@@ -21,7 +21,7 @@ public class Specification {
     public Specification() {
     }
 
-    public Specification(int specificationId, product product, String screen, String cpu, String ram, String camera, String battery, String os) {
+    public Specification(int specificationId, Product product, String screen, String cpu, String ram, String camera, String battery, String os) {
         this.specificationId = specificationId;
         this.product = product;
         this.screen = screen;
@@ -40,11 +40,11 @@ public class Specification {
         this.specificationId = specificationId;
     }
 
-    public product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

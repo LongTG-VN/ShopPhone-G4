@@ -7,8 +7,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.role;
-import model.user;
+import model.Role;
+import model.User;
 import utils.DBContext;
 
 public class userDAO extends DBContext {
@@ -16,8 +16,8 @@ public class userDAO extends DBContext {
     private roleDAO roleDAO = new roleDAO();
 
     // 1. Lấy tất cả người dùng
-    public List<user> getAllUser() {
-        List<user> list = new ArrayList<>();
+    public List<User> getAllUser() {
+        List<User> list = new ArrayList<>();
         String sql = "SELECT * FROM users";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -33,7 +33,7 @@ public class userDAO extends DBContext {
     }
 
     // 2. Lấy người dùng theo ID
-    public user getUserById(int id) {
+    public User getUserById(int id) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -49,11 +49,11 @@ public class userDAO extends DBContext {
     }
 
     // 3. Thêm mới người dùng (Bổ sung user_name)
-    public boolean addUser(user u) {
+    public boolean addUser(User u) {
         String sql = "INSERT INTO users (user_name, full_name, email, password_hash, phone, role_id, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, u.getUserName()); // Cần đảm bảo model user có field userName
+            ps.setString(1, u.getUserName()); // Cần đảm bảo model User có field userName
             ps.setString(2, u.getFullName());
             ps.setString(3, u.getEmail());
             ps.setString(4, hashMD5(u.getPassword())); // Mã hóa ngay khi add
@@ -68,7 +68,7 @@ public class userDAO extends DBContext {
     }
 
     // 4. Cập nhật thông tin (Fix lại thứ tự ? và cột)
-    public boolean updateUser(user u) {
+    public boolean updateUser(User u) {
         String sql = "UPDATE users SET user_name = ?, full_name = ?, email = ?, phone = ?, role_id = ?, status = ? , password_hash = ? WHERE user_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class userDAO extends DBContext {
     }
 
     // 6. Đăng nhập (Sửa đúng tên cột trong DB của bạn là password_hash)
-    public user login(String username, String pass) {
+    public User login(String username, String pass) {
         String sql = "SELECT * FROM users WHERE user_name = ? AND password_hash = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -118,9 +118,9 @@ public class userDAO extends DBContext {
     }
 
     // Hàm bổ trợ để tránh lặp code (Helper Method)
-    private user mapUser(ResultSet rs) throws Exception {
-        role r = roleDAO.getRoleById(rs.getInt("role_id"));
-        return new user(
+    private User mapUser(ResultSet rs) throws Exception {
+        Role r = roleDAO.getRoleById(rs.getInt("role_id"));
+        return new User(
                 rs.getInt("user_id"),
                 rs.getString("user_name"), // Cột mới thêm
                 rs.getString("full_name"),
@@ -151,15 +151,15 @@ public class userDAO extends DBContext {
     public static void main(String[] args) {
         userDAO dao = new userDAO();
         // Test login
-        List<user> list = dao.getAllUser();
-//        for (user object : list) {
+        List<User> list = dao.getAllUser();
+//        for (User object : list) {
 //            System.out.println(object);
 //        }
          roleDAO b = new roleDAO();
 //      dao.deleteUser(1008);
-//        dao.updateUser(new user(1009, "long", "lo", "aa@gmail.com", "123", "12312", b.getRoleById(1), "ACTIVE", LocalDateTime.now()));
-//        dao.addUser(new user(0, "long", "lol", "a111a@gmail.com", "12345", "12312", b.getRoleById(1), "ACTIVE", LocalDateTime.now()));
-        user u = dao.login("lol", "12345");
+//        dao.updateUser(new User(1009, "long", "lo", "aa@gmail.com", "123", "12312", b.getRoleById(1), "ACTIVE", LocalDateTime.now()));
+//        dao.addUser(new User(0, "long", "lol", "a111a@gmail.com", "12345", "12312", b.getRoleById(1), "ACTIVE", LocalDateTime.now()));
+        User u = dao.login("lol", "12345");
         if(u != null) System.out.println("Chào mừng: " + u.getFullName());
     }
 }

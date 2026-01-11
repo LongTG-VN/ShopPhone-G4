@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 public class ImportReceipts {
     private int receiptId;
     private Supplier supplier;
-    private user user;
+    private User user;
     private double totalCost;
     private LocalDateTime importDate;
 
     public ImportReceipts() {
     }
 
-    public ImportReceipts(int receiptId, Supplier supplier, user user, double totalCost, LocalDateTime importDate) {
+    public ImportReceipts(int receiptId, Supplier supplier, User user, double totalCost, LocalDateTime importDate) {
         this.receiptId = receiptId;
         this.supplier = supplier;
         this.user = user;
@@ -44,11 +44,11 @@ public class ImportReceipts {
         this.supplier = supplier;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

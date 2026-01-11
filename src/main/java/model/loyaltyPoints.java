@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
  *
  * @author ASUS
  */
-public class loyaltyPoints {
+public class LoyaltyPoints {
     private int pointID;
-    private user user;
+    private User user;
     private int points;
     private String reason;
     private LocalDateTime created_at;
 
-    public loyaltyPoints() {
+    public LoyaltyPoints() {
     }
 
-    public loyaltyPoints(int pointID, user user, int points, String reason, LocalDateTime created_at) {
+    public LoyaltyPoints(int pointID, User user, int points, String reason, LocalDateTime created_at) {
         this.pointID = pointID;
         this.user = user;
         this.points = points;
@@ -36,11 +36,11 @@ public class loyaltyPoints {
         this.pointID = pointID;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

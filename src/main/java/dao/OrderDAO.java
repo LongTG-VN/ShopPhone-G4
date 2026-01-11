@@ -16,7 +16,7 @@ import java.util.List;
 import model.Order;
 import model.OrderItem;
 import model.PaymentMethod;
-import model.user;
+import model.User;
 import model.Voucher;
 import utils.DBContext;
 
@@ -192,7 +192,7 @@ public class OrderDAO extends DBContext {
         LocalDateTime created_at = (ts != null) ? ts.toLocalDateTime() : LocalDateTime.now();
 
         // Lấy object con
-        user user = userDAO.getUserById(userId);
+        User user = userDAO.getUserById(userId);
         Voucher voucher = (voucherId == 0) ? null : voucherDAO.getVoucherById(voucherId);
         PaymentMethod payment = paymentMethodDAO.getPaymentMethodById(paymentMethodId);
 
@@ -219,7 +219,7 @@ public static void main(String[] args) {
 
     try {
         // A. Chuẩn bị dữ liệu mẫu
-        user customer = uDao.getUserById(2); // Giả sử User ID 2 tồn tại
+        User customer = uDao.getUserById(2); // Giả sử User ID 2 tồn tại
         PaymentMethod payment = pDao.getPaymentMethodById(1); // Giả sử Payment ID 1 tồn tại (COD)
         model.ProductVariants product1 = productDAO.getVariantById(1); // iPhone
         model.ProductVariants product2 = productDAO.getVariantById(3); // Samsung

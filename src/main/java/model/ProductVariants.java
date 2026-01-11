@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class ProductVariants {
 
     private int variantId;
-    private product product;
+    private Product product;
     private String color;
     private String storage_capacity;
     private String sku;
@@ -27,7 +27,7 @@ public class ProductVariants {
     public ProductVariants() {
     }
 
-    public ProductVariants(int variantId, product product, String color, String storage_capacity, String sku, double original_price, double price, String imgURL, int stock_quantity, byte is_active, LocalDateTime created_at) {
+    public ProductVariants(int variantId, Product product, String color, String storage_capacity, String sku, double original_price, double price, String imgURL, int stock_quantity, byte is_active, LocalDateTime created_at) {
         this.variantId = variantId;
         this.product = product;
         this.color = color;
@@ -49,11 +49,11 @@ public class ProductVariants {
         this.variantId = variantId;
     }
 
-    public product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

@@ -10,9 +10,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.user;
+import model.User;
 import model.Wishlist;
-import model.product;
+import model.Product;
 import utils.DBContext;
 
 /**
@@ -22,7 +22,7 @@ import utils.DBContext;
 public class WishlistDAO extends DBContext {
 
     private userDAO userDAO = new userDAO();
-    private productDAO productDAO = new productDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     public List<Wishlist> getAllWishlists() {
 
@@ -126,7 +126,7 @@ public class WishlistDAO extends DBContext {
         return false;
     }
 
-    // 5. Đếm số lượng yêu thích của user (Dùng để hiện số trên icon trái tim ở Header)
+    // 5. Đếm số lượng yêu thích của User (Dùng để hiện số trên icon trái tim ở Header)
     public int countWishlistItems(int userId) {
         String sql = "SELECT COUNT(*) FROM wishlists WHERE user_id = ?";
         try {
@@ -153,8 +153,8 @@ public class WishlistDAO extends DBContext {
         LocalDateTime addedAt = (ts != null) ? ts.toLocalDateTime() : LocalDateTime.now();
 
         // Lấy thông tin User và Product đầy đủ
-        user user = userDAO.getUserById(userId);
-        product product = productDAO.getProductById(productId);
+        User user = userDAO.getUserById(userId);
+        Product product = productDAO.getProductById(productId);
 
         return new Wishlist(wishlistId, user, product, addedAt);
     }
@@ -162,7 +162,7 @@ public class WishlistDAO extends DBContext {
     // ================= TEST CASE =================
     public static void main(String[] args) {
         WishlistDAO dao = new WishlistDAO();
-        int testUserId = 2; // Giả sử user là Customer01
+        int testUserId = 2; // Giả sử User là Customer01
 
         System.out.println("--- 1.Lấy tất cả DANH SÁCH user HIỆN TẠI ---");
         List<Wishlist> myWishlist = dao.getAllWishlists();

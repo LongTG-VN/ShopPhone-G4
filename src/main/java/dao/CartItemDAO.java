@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.CartItem;
 import model.ProductVariants; // Giả sử bạn có class này
-import model.shoppingSession; // Giả sử bạn có class này
+import model.ShoppingSession; // Giả sử bạn có class này
 import utils.DBContext;
 
 /**
@@ -175,7 +175,7 @@ public class CartItemDAO extends DBContext {
         LocalDateTime added_at = (ts != null) ? ts.toLocalDateTime() : LocalDateTime.now();
 
         // Lấy object phụ thuộc
-        shoppingSession session = sessionDAO.getSessionById(sessionId);
+        ShoppingSession session = sessionDAO.getSessionById(sessionId);
         ProductVariants variant = productVariantDAO.getVariantById(variantId);
         
         return new CartItem(cart_item_id, session, variant, quantity, price, added_at);

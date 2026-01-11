@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.ProductImage;
-import model.product;
+import model.Product;
 import utils.DBContext;
 
 /**
@@ -20,7 +20,7 @@ import utils.DBContext;
 public class ProductImageDAO extends DBContext {
 
     // Dependency: Cần ProductDAO để lấy thông tin Product khi map dữ liệu
-    private productDAO productDAO = new productDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     // 1. READ: Lấy tất cả ảnh (Existing)
     public List<ProductImage> getAllProductImage() {
@@ -130,7 +130,7 @@ public class ProductImageDAO extends DBContext {
         byte isThumbnail = rs.getByte("is_thumbnail");
 
         // Gọi DAO khác để lấy full object Product (Nếu cần)
-        product product = productDAO.getProductById(productID);
+        Product product = productDAO.getProductById(productID);
 
         return new ProductImage(imageId, product, imageURL, isThumbnail);
     }
@@ -138,7 +138,7 @@ public class ProductImageDAO extends DBContext {
     // ================= MAIN TEST CASE =================
     public static void main(String[] args) {
         ProductImageDAO dao = new ProductImageDAO();
-        productDAO pDao = new productDAO(); // Cần cái này để giả lập object Product khi thêm mới
+        ProductDAO pDao = new ProductDAO(); // Cần cái này để giả lập object Product khi thêm mới
 
         System.out.println("--- TEST 1: LIST ALL IMAGES ---");
         List<ProductImage> list = dao.getAllProductImage();

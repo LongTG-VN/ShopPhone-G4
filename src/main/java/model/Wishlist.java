@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
  */
 public class Wishlist {
     private int wistlistID;
-    private user user;
-    private product product;
+    private User user;
+    private Product product;
     private LocalDateTime added_at;
 
     public Wishlist() {
     }
 
-    public Wishlist(int wistlistID, user user, product product, LocalDateTime added_at) {
+    public Wishlist(int wistlistID, User user, Product product, LocalDateTime added_at) {
         this.wistlistID = wistlistID;
         this.user = user;
         this.product = product;
@@ -34,19 +34,19 @@ public class Wishlist {
         this.wistlistID = wistlistID;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.loyaltyPoints;
+import model.LoyaltyPoints;
 import utils.DBContext;
 
 /**
@@ -20,9 +20,9 @@ public class loyaltyPointsDAO extends DBContext{
     
         private userDAO userDAO = new userDAO();
 
-        public List<loyaltyPoints> getAllloyaltyPoints() {
+        public List<LoyaltyPoints> getAllloyaltyPoints() {
        
-        List<loyaltyPoints> list = new ArrayList<>();
+        List<LoyaltyPoints> list = new ArrayList<>();
         String sql = "SELECT loyalty_points.*\n"
                 + "FROM     loyalty_points";
         try {
@@ -36,18 +36,18 @@ public class loyaltyPointsDAO extends DBContext{
                 String reason = rs.getString("reason");
                 LocalDateTime created_at = rs.getTimestamp("created_at").toLocalDateTime();
 
-                list.add(new loyaltyPoints(pointID, userDAO.getUserById(userID), points, reason, created_at));
+                list.add(new LoyaltyPoints(pointID, userDAO.getUserById(userID), points, reason, created_at));
             }
         } catch (Exception e) {
         }
         return list;
     }
         
-        public boolean addLoyaltyPoints(loyaltyPoints lp) {
+        public boolean addLoyaltyPoints(LoyaltyPoints lp) {
         String sql = "INSERT INTO [loyalty_points] ([user_id], [points], [reason]) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            // Lấy ID từ đối tượng user bên trong loyaltyPoints
+            // Lấy ID từ đối tượng User bên trong LoyaltyPoints
             ps.setInt(1, lp.getUser().getUserId()); 
             ps.setInt(2, lp.getPoints());
             ps.setString(3, lp.getReason());
@@ -64,12 +64,12 @@ public class loyaltyPointsDAO extends DBContext{
         public static void main(String[] args) {
          loyaltyPointsDAO a = new loyaltyPointsDAO();
          userDAO uDao = new userDAO();
-         model.user u = uDao.getUserById(1);
-         loyaltyPoints newPoint = new loyaltyPoints(0, u, 100, "Thưởng mua hàng A", LocalDateTime.now());
+         model.User u = uDao.getUserById(1);
+         LoyaltyPoints newPoint = new LoyaltyPoints(0, u, 100, "Thưởng mua hàng A", LocalDateTime.now());
          a.addLoyaltyPoints(newPoint);     
          
-         List<loyaltyPoints> list = a.getAllloyaltyPoints();
-                 for (loyaltyPoints points : list) {
+         List<LoyaltyPoints> list = a.getAllloyaltyPoints();
+                 for (LoyaltyPoints points : list) {
                      System.out.println(points);
             }
 

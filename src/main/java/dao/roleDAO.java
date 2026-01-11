@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.role;
+import model.Role;
 import utils.DBContext;
 
 /**
@@ -17,8 +17,8 @@ import utils.DBContext;
  */
 public class roleDAO extends DBContext {
 
-    public List<role> getAllRole() {
-        List<role> list = new ArrayList<>();
+    public List<Role> getAllRole() {
+        List<Role> list = new ArrayList<>();
         String sql = "SELECT roles.*\n"
                 + "FROM     roles";
         try {
@@ -30,7 +30,7 @@ public class roleDAO extends DBContext {
                 String role_name = rs.getString("role_name");
                 String description = rs.getString("description");
                 byte is_active = rs.getByte("is_active");
-                role role = new role(role_id, role_name, description, is_active);
+                Role role = new Role(role_id, role_name, description, is_active);
 
                 list.add(role);
             }
@@ -39,7 +39,7 @@ public class roleDAO extends DBContext {
         return list;
     }
 
-    public void insertRole(role r) {
+    public void insertRole(Role r) {
         String sql = "INSERT INTO roles (role_name, description, is_active) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -52,14 +52,14 @@ public class roleDAO extends DBContext {
         }
     }
 
-    public role getRoleById(int id) {
+    public Role getRoleById(int id) {
         String sql = "SELECT * FROM roles WHERE role_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new role(rs.getInt("role_id"),
+                return new Role(rs.getInt("role_id"),
                         rs.getString("role_name"),
                         rs.getString("description"),
                         rs.getByte("is_active"));
@@ -70,7 +70,7 @@ public class roleDAO extends DBContext {
         return null;
     }
 
-    public void updateRole(role r) {
+    public void updateRole(Role r) {
         String sql = "UPDATE roles SET role_name = ?, description = ? WHERE role_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -97,17 +97,17 @@ public class roleDAO extends DBContext {
 
     public static void main(String[] args) {
         roleDAO a = new roleDAO();
-        List<role> list = a.getAllRole();
+        List<Role> list = a.getAllRole();
         // hiển thị 
-//                for (role object : list) {
+//                for (Role object : list) {
 //            System.out.println(object);
 //        }
         // Xóa 
 //         a.deleteRole(3);
         //Chèn
-//        a.insertRole(new role(10,"hhi", "Nhân viên bán hàng tai gia",(byte) 1));
+//        a.insertRole(new Role(10,"hhi", "Nhân viên bán hàng tai gia",(byte) 1));
         // Update
-//        a.updateRole(new role(4, "WAREHOUSE", "Nhân viên kho", (byte) 0));
+//        a.updateRole(new Role(4, "WAREHOUSE", "Nhân viên kho", (byte) 0));
         // Get by ID
 //        System.out.println(a.getRoleById(1));
 

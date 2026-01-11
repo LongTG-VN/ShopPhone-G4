@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.shoppingSession;
-import model.user;
+import model.ShoppingSession;
+import model.User;
 import utils.DBContext;
 
 /**
@@ -21,8 +21,8 @@ public class shoppingSessionDAO extends DBContext {
 
     private userDAO userDAO = new userDAO();
 
-    public List<shoppingSession> getAllShoppingSession() {
-        List<shoppingSession> list = new ArrayList<>();
+    public List<ShoppingSession> getAllShoppingSession() {
+        List<ShoppingSession> list = new ArrayList<>();
         String sql = "SELECT shopping_sessions.*\n"
                 + "FROM     shopping_sessions";
         try {
@@ -37,14 +37,14 @@ public class shoppingSessionDAO extends DBContext {
 
                 LocalDateTime updated_at = rs.getTimestamp("updated_at").toLocalDateTime();
 
-                list.add(new shoppingSession(userID, userDAO.getUserById(userID), totalPrice, updated_at));
+                list.add(new ShoppingSession(userID, userDAO.getUserById(userID), totalPrice, updated_at));
             }
         } catch (Exception e) {
         }
         return list;
     }
 
-    public shoppingSession getSessionById(int sessionId) {
+    public ShoppingSession getSessionById(int sessionId) {
         String sql = "SELECT * FROM shopping_sessions WHERE session_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -55,7 +55,7 @@ public class shoppingSessionDAO extends DBContext {
                 double totalPrice = rs.getDouble("total_price");
                 LocalDateTime updatedAt = rs.getTimestamp("updated_at").toLocalDateTime();
 
-                return new shoppingSession(
+                return new ShoppingSession(
                         sessionId,
                         userDAO.getUserById(userId),
                         totalPrice,
@@ -70,8 +70,8 @@ public class shoppingSessionDAO extends DBContext {
 
     public static void main(String[] args) {
         shoppingSessionDAO a = new shoppingSessionDAO();
-        List<shoppingSession> list = a.getAllShoppingSession();
-//        for (shoppingSession session : list) {
+        List<ShoppingSession> list = a.getAllShoppingSession();
+//        for (ShoppingSession session : list) {
 //            System.out.println(session);
 //        }
         System.out.println(a.getSessionById(1));

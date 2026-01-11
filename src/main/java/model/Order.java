@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class Order {
     private int orderId;
-    private user user;
+    private User user;
     private Voucher voucher;
     private PaymentMethod paymentMethod;
     private double totalAmount;
@@ -24,7 +24,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, user user, Voucher voucher, PaymentMethod paymentMethod, double totalAmount, String shippingAddress, String status, byte isPaid, LocalDateTime created_at) {
+    public Order(int orderId, User user, Voucher voucher, PaymentMethod paymentMethod, double totalAmount, String shippingAddress, String status, byte isPaid, LocalDateTime created_at) {
         this.orderId = orderId;
         this.user = user;
         this.voucher = voucher;
@@ -44,11 +44,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

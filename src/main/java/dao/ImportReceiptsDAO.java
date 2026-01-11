@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.ImportReceipts;
 import model.Supplier;
-import model.user;
+import model.User;
 import utils.DBContext;
 
 /**
@@ -148,7 +148,7 @@ public class ImportReceiptsDAO extends DBContext {
 
         // Lấy object Supplier và User (Staff)
         Supplier supplier = supplierDAO.getSupplierById(supplierId);
-        user staff = userDao.getUserById(staffId);
+        User staff = userDao.getUserById(staffId);
 
         return new ImportReceipts(receiptId, supplier, staff, totalCost, importDate);
     }
@@ -168,7 +168,7 @@ public class ImportReceiptsDAO extends DBContext {
         System.out.println("\n--- 2. CREATE NEW RECEIPT ---");
         // Giả lập dữ liệu: Supplier ID 1, Staff ID 1 (Admin)
         Supplier sup = supDao.getSupplierById(1);
-        user staff = uDao.getUserById(1);
+        User staff = uDao.getUserById(1);
         
         if (sup != null && staff != null) {
             ImportReceipts newReceipt = new ImportReceipts(0, sup, staff, 0, LocalDateTime.now());

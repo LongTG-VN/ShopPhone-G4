@@ -10,21 +10,21 @@ import java.time.LocalDateTime;
  *
  * @author ASUS
  */
-public class user {
+public class User {
     private int userId;
     private String fullName;
     private String userName;
     private String email;
     private String password;
     private String phone;
-    private role role;
+    private Role role;
     private String status;
     private LocalDateTime created_at;
 
-    public user() {
+    public User() {
     }
 
-    public user(int userId, String fullName, String userName, String email, String password, String phone, role role, String status, LocalDateTime created_at) {
+    public User(int userId, String fullName, String userName, String email, String password, String phone, Role role, String status, LocalDateTime created_at) {
         this.userId = userId;
         this.fullName = fullName;
         this.userName = userName;
@@ -84,11 +84,11 @@ public class user {
         this.phone = phone;
     }
 
-    public role getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

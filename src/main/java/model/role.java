@@ -8,16 +8,16 @@ package model;
  *
  * @author ASUS
  */
-public class role {
+public class Role {
     private int role_id;
     private String role_name;
     private String description;
     private byte is_active;
 
-    public role() {
+    public Role() {
     }
 
-    public role(int role_id, String role_name, String description, byte is_active) {
+    public Role(int role_id, String role_name, String description, byte is_active) {
         this.role_id = role_id;
         this.role_name = role_name;
         this.description = description;

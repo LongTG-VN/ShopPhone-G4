@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class CartItem {
     private int cartItemId;
-    private shoppingSession ShoppingSession;
+    private ShoppingSession ShoppingSession;
     private ProductVariants productVarant;
     private int quantity;
     private double price;
@@ -21,7 +21,7 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(int cartItemId, shoppingSession ShoppingSession, ProductVariants productVarant, int quantity, double price, LocalDateTime added_at) {
+    public CartItem(int cartItemId, ShoppingSession ShoppingSession, ProductVariants productVarant, int quantity, double price, LocalDateTime added_at) {
         this.cartItemId = cartItemId;
         this.ShoppingSession = ShoppingSession;
         this.productVarant = productVarant;
@@ -44,11 +44,11 @@ public class CartItem {
         this.cartItemId = cartItemId;
     }
 
-    public shoppingSession getShoppingSession() {
+    public ShoppingSession getShoppingSession() {
         return ShoppingSession;
     }
 
-    public void setShoppingSession(shoppingSession ShoppingSession) {
+    public void setShoppingSession(ShoppingSession ShoppingSession) {
         this.ShoppingSession = ShoppingSession;
     }
 

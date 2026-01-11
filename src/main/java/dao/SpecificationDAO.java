@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import model.Brand;
-import model.product;
+import model.Product;
 import model.Specification;
 import utils.DBContext;
 
@@ -21,7 +21,7 @@ import utils.DBContext;
  */
 public class SpecificationDAO extends DBContext {
 
-    private productDAO productDAO = new productDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     // 1. Lấy tất cả thông số (Ít dùng, thường chỉ dùng để backup/report)
     public List<Specification> getAllSpecifications() {
@@ -132,7 +132,7 @@ public class SpecificationDAO extends DBContext {
         String os = rs.getString("os");
 
         // Gọi ProductDAO để lấy object Product đầy đủ
-        product product = productDAO.getProductById(productId);
+        Product product = productDAO.getProductById(productId);
 
         // Đảm bảo thứ tự Constructor trong Model khớp với dòng này
         return new Specification(specId, product, screen, cpu, ram, camera, battery, os);
@@ -141,7 +141,7 @@ public class SpecificationDAO extends DBContext {
     // ================= TEST CASE =================
     public static void main(String[] args) {
         SpecificationDAO dao = new SpecificationDAO();
-        productDAO pDao = new productDAO(); // Cần để lấy Product khi thêm mới
+        ProductDAO pDao = new ProductDAO(); // Cần để lấy Product khi thêm mới
         CategoryDAO a = new CategoryDAO();
         BrandDAO b = new BrandDAO();
 

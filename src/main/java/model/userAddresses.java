@@ -8,18 +8,18 @@ package model;
  *
  * @author ASUS
  */
-public class userAddresses {
+public class UserAddresses {
     private int addressID;
-    private user user;
+    private User user;
     private String recipientName;
     private String phone;
     private String addressLine;
     private byte is_default;
 
-    public userAddresses() {
+    public UserAddresses() {
     }
 
-    public userAddresses(int addressID, user user, String recipientName, String phone, String addressLine, byte is_default) {
+    public UserAddresses(int addressID, User user, String recipientName, String phone, String addressLine, byte is_default) {
         this.addressID = addressID;
         this.user = user;
         this.recipientName = recipientName;
@@ -36,11 +36,11 @@ public class userAddresses {
         this.addressID = addressID;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

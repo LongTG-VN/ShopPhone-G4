@@ -10,16 +10,16 @@ import java.time.LocalDateTime;
  *
  * @author ASUS
  */
-public class shoppingSession {
+public class ShoppingSession {
     private int sessionID;
-    private user user;
+    private User user;
     private double totalPrice;
     private LocalDateTime updated_at;
 
-    public shoppingSession() {
+    public ShoppingSession() {
     }
 
-    public shoppingSession(int sessionID, user user, double totalPrice, LocalDateTime updated_at) {
+    public ShoppingSession(int sessionID, User user, double totalPrice, LocalDateTime updated_at) {
         this.sessionID = sessionID;
         this.user = user;
         this.totalPrice = totalPrice;
@@ -34,11 +34,11 @@ public class shoppingSession {
         this.sessionID = sessionID;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

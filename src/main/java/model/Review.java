@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class Review {
     private int reviewID;
-    private user user;
+    private User user;
     private Product product;
     private int rating;
     private String comment;
@@ -23,7 +23,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(int reviewID, user user, Product product, int rating, String comment, byte is_active, String review_image_url, LocalDateTime created_at) {
+    public Review(int reviewID, User user, Product product, int rating, String comment, byte is_active, String review_image_url, LocalDateTime created_at) {
         this.reviewID = reviewID;
         this.user = user;
         this.product = product;
@@ -42,11 +42,11 @@ public class Review {
         this.reviewID = reviewID;
     }
 
-    public user getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(user user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

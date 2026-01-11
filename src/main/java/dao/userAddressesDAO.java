@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.role;
-import model.userAddresses;
+import model.Role;
+import model.UserAddresses;
 import utils.DBContext;
 
 /**
@@ -20,8 +20,8 @@ public class userAddressesDAO extends DBContext {
 
     private userDAO userDAO = new userDAO();
 
-    public List<userAddresses> getAllUserAddresses() {
-        List<userAddresses> list = new ArrayList<>();
+    public List<UserAddresses> getAllUserAddresses() {
+        List<UserAddresses> list = new ArrayList<>();
         String sql = "SELECT user_addresses.*\n"
                 + "FROM     user_addresses	";
         try {
@@ -36,7 +36,7 @@ public class userAddressesDAO extends DBContext {
                 String addressLine = rs.getString("address_line");
                 byte is_default = rs.getByte("is_default");
 
-                list.add(new userAddresses(addressID, userDAO.getUserById(userID), recipientName, phone, addressLine, is_default));
+                list.add(new UserAddresses(addressID, userDAO.getUserById(userID), recipientName, phone, addressLine, is_default));
             }
         } catch (Exception e) {
         }
@@ -45,8 +45,8 @@ public class userAddressesDAO extends DBContext {
 
     public static void main(String[] args) {
         userAddressesDAO a = new userAddressesDAO();
-        List<userAddresses> list = a.getAllUserAddresses();
-        for (userAddresses addresses : list) {
+        List<UserAddresses> list = a.getAllUserAddresses();
+        for (UserAddresses addresses : list) {
             System.out.println(addresses);
         }
 

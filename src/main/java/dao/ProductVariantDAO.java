@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import model.product;
+import model.Product;
 import model.ProductVariants;
 import utils.DBContext;
 
@@ -21,7 +21,7 @@ import utils.DBContext;
  */
 public class ProductVariantDAO extends DBContext {
 
-    private productDAO productDAO = new productDAO();
+    private ProductDAO productDAO = new ProductDAO();
 
     // 1. Lấy tất cả biến thể (List All)
     public List<ProductVariants> getAllProductVariants() {
@@ -76,8 +76,8 @@ public class ProductVariantDAO extends DBContext {
     // 4. Thêm biến thể mới (Insert)
     public boolean insertVariant(ProductVariants pv) {
         String sql = "INSERT INTO [product_variants] "
-                   + "([product_id], [color], [storage_capacity], [sku], [original_price], [price], [stock_quantity], [image_url], [is_active]) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "([product_id], [color], [storage_capacity], [sku], [original_price], [price], [stock_quantity], [image_url], [is_active]) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, pv.getProduct().getProductId());
@@ -100,15 +100,15 @@ public class ProductVariantDAO extends DBContext {
     // 5. Cập nhật biến thể (Update)
     public boolean updateVariant(ProductVariants pv) {
         String sql = "UPDATE [product_variants] SET "
-                   + "[color] = ?, "
-                   + "[storage_capacity] = ?, "
-                   + "[sku] = ?, "
-                   + "[original_price] = ?, "
-                   + "[price] = ?, "
-                   + "[stock_quantity] = ?, "
-                   + "[image_url] = ?, "
-                   + "[is_active] = ? "
-                   + "WHERE [variant_id] = ?";
+                + "[color] = ?, "
+                + "[storage_capacity] = ?, "
+                + "[sku] = ?, "
+                + "[original_price] = ?, "
+                + "[price] = ?, "
+                + "[stock_quantity] = ?, "
+                + "[image_url] = ?, "
+                + "[is_active] = ? "
+                + "WHERE [variant_id] = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pv.getColor());
@@ -146,21 +146,21 @@ public class ProductVariantDAO extends DBContext {
         int variantId = rs.getInt("variant_id");
         int productId = rs.getInt("product_id");
         String color = rs.getString("color");
-        
+
         // Lỗi cũ: rs.getString("stock_quantity") -> Sai, phải là storage_capacity
-        String storageCapacity = rs.getString("storage_capacity"); 
-        
+        String storageCapacity = rs.getString("storage_capacity");
+
         String sku = rs.getString("sku");
         double originalPrice = rs.getDouble("original_price");
         double price = rs.getDouble("price");
         int stockQuantity = rs.getInt("stock_quantity");
         String imgURL = rs.getString("image_url");
         byte isActive = rs.getByte("is_active");
-        
+
         Timestamp ts = rs.getTimestamp("created_at");
         LocalDateTime createdAt = (ts != null) ? ts.toLocalDateTime() : LocalDateTime.now();
 
-        product product = productDAO.getProductById(productId);
+        Product product = productDAO.getProductById(productId);
 
         return new ProductVariants(variantId, product, color, storageCapacity, sku, originalPrice, price, imgURL, stockQuantity, isActive, createdAt);
     }
@@ -168,10 +168,10 @@ public class ProductVariantDAO extends DBContext {
     // ================= TEST CASE NGẮN GỌN =================
     public static void main(String[] args) {
         ProductVariantDAO dao = new ProductVariantDAO();
-        productDAO pDao = new productDAO();
-        
+        ProductDAO pDao = new ProductDAO();
+
         // Product ID để test (Ví dụ ID 1 = iPhone 15 Pro Max)
-        int productId = 1; 
+        int productId = 1;
 //        System.out.println("TEST in ra het");
 //        for (ProductVariants allProductVariant : dao.getAllProductVariants()) {
 //            System.out.println(allProductVariant);
@@ -180,7 +180,7 @@ public class ProductVariantDAO extends DBContext {
         // 1. Chèn (Insert) - Dùng SKU ngẫu nhiên để tránh lỗi Duplicate Key
 //        System.out.println("--- INSERT VARIANT ---");
         String uniqueSku = "TEST-IP15-" + System.currentTimeMillis();
-        product p = pDao.getProductById(productId);
+        Product p = pDao.getProductById(productId);
 //        ProductVariants newVariant = new ProductVariants(0, p, "Pink Test", "128GB", uniqueSku, 30000000, 28000000, "img.jpg", 10, (byte)1, null);
 //        
 //        boolean isInserted = dao.insertVariant(newVariant);
@@ -190,16 +190,10 @@ public class ProductVariantDAO extends DBContext {
 //        System.out.println("\n--- LIST BY PRODUCT ID " + productId + " ---");
 //        List<ProductVariants> list = dao.getVariantsByProductId(productId);
 //         list.forEach(System.out::println); // In hết cac bien the cua 1 sp
-        
-
 //             System.out.println("Delete Result: " + dao.deleteVariant(7));
-           
-             
 //        
-            System.out.println("Update Result: " + dao.updateVariant(new ProductVariants(8, p, "Pink Test", "128GB", uniqueSku, 30000000, 28000000, "img test test.jpg", 10, (byte)1, null)));
+        System.out.println("Update Result: " + dao.updateVariant(new ProductVariants(8, p, "Pink Test", "128GB", uniqueSku, 30000000, 28000000, "img test test.jpg", 10, (byte) 1, null)));
 
+    }
 
-       
-        }
-    
 }

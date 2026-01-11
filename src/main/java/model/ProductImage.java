@@ -10,14 +10,14 @@ package model;
  */
 public class ProductImage {
     private  int imageID;
-    private product product;
+    private Product product;
     private String imageUrl;
     private byte is_thumbnail;
 
     public ProductImage() {
     }
 
-    public ProductImage(int imageID, product product, String imageUrl, byte is_thumbnail) {
+    public ProductImage(int imageID, Product product, String imageUrl, byte is_thumbnail) {
         this.imageID = imageID;
         this.product = product;
         this.imageUrl = imageUrl;
@@ -32,13 +32,15 @@ public class ProductImage {
         this.imageID = imageID;
     }
 
-    public product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProductl(product productl) {
-        this.product = productl;
+    public void setProduct(Product product) {
+        this.product = product;
     }
+
+    
 
     public String getImageUrl() {
         return imageUrl;
